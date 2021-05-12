@@ -1,0 +1,27 @@
+int fsrPin = 0;     // the FSR and 10K pulldown are connected to a0
+int fsrReading;     // the analog reading from the FSR resistor divider
+ 
+void setup(void) {
+  Serial.begin(9600);   
+}
+ 
+void loop(void) {
+  fsrReading = analogRead(fsrPin);  
+ 
+  Serial.print("Analog reading = ");
+  Serial.print(fsrReading);     // readings
+ 
+  // We'll have a few threshholds, qualitatively determined
+  if (fsrReading < 10) {
+    Serial.println(" - Restock Order!");
+  } else if (fsrReading < 200) {
+    Serial.println(" - 20% Stock");
+  } else if (fsrReading < 500) {
+    Serial.println(" - 50% Stock");
+  } else if (fsrReading < 800) {
+    Serial.println(" - 80% Stock");
+  } else {
+    Serial.println(" - 100% Stock");
+  }
+  delay(1000);
+} 
